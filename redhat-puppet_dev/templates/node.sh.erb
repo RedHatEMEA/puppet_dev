@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Get username and password
+. /etc/puppet_dev/puppet_dev_env.sh
+
+# Get YAML from Satellite server
+curl -k -u $USERNAME:$PASSWORD -X GET HTTPS://<%= @satellite_server %>/hosts/<%= @fqdn %>\?format\=yaml 

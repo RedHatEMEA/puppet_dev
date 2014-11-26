@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Check if executed with root privileges else exit
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
+
+PUPPET_DEV_FILE=/etc/puppet_dev/puppet_dev_env.sh
+
+# Check if $PUPPET_DEV_FILE exist else prompt for username and password
+if [ ! -e $PUPPET_DEV_FILE ];then
+  read -p Username: username
+  stty_orig=`stty -g` # save original terminal setting.
+  stty -echo          # turn-off echoing.
+  read -s -p Password: pwd
+  stty $stty_orig     # restore terminal setting.
+  echo ""
+  echo "USERNAME=$username" > $PUPPET_DEV_FILE
+  chown root:root $PUPPET_DEV_FILE
+  chmod 600 $PUPPET_DEV_FILE
+  echo "PASSWORD=$pwd" >> $PUPPET_DEV_FILE
+fi
+
+# Do the puppet run 
+puppet apply --config /etc/puppet_dev/puppet_dev.conf "$@"

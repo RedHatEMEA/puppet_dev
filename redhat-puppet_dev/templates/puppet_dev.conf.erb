@@ -1,0 +1,11 @@
+[main]
+node_terminus = exec
+external_nodes = /etc/puppet_dev/node.sh
+<% if @storeconfigs -%>
+# Add storeconfigs configuration
+# TODO: Suppport other storefongis mechanism than puppetdb?
+ssldir = <% @ssldir %>
+storeconfigs = true
+storeconfigs_backend = puppetdb
+<% end -%>
+
