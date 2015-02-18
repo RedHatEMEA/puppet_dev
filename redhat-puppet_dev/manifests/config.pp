@@ -34,7 +34,7 @@
 #
 # David Juran <djuran@redhat.com>
 # Peter Gustafsson <pgustaft@redhat.com>
-# Harald Jensås <hjensas@redhat.com>
+# Harald Jensas <hjensas@redhat.com>
 #
 # === Copyright
 #
