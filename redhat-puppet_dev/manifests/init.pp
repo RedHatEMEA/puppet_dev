@@ -50,7 +50,10 @@ class puppet_dev(
   $ssldir           = '/var/lib/puppet/ssl',
   $repo_path        = '/var/tmp/puppet',
   $git_repos        = ['git@github.com:EXAMPLE/example.git',
-                      'git@github.com:EXAMPLE/example.git',]
+                      'git@github.com:EXAMPLE/example.git',],
+  $util_packages    = ['bash-completion',
+                       'git',
+                       'vim'],
 ) {
 
   # For Storeconfigs we need puppetdb
@@ -60,7 +63,12 @@ class puppet_dev(
     }
   }
 
-  #create_repos { $git_repos:; }
+  # Install some nice-to-have things
+  if !empty($util_packages) {
+    package {$package_list:
+      ensure => present,
+    }
+  }
 
   class { 'puppet_dev::config':
     satellite_server => $satellite_server,
