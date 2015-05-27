@@ -53,7 +53,7 @@ class puppet_dev(
                       'git@github.com:EXAMPLE/example.git',],
   $util_packages    = ['bash-completion',
                        'git',
-                       'vim'],
+                       'vim-enhanced'],
 ) {
 
   # For Storeconfigs we need puppetdb
@@ -65,7 +65,7 @@ class puppet_dev(
 
   # Install some nice-to-have things
   if !empty($util_packages) {
-    package {$package_list:
+    package {$util_packages:
       ensure => present,
     }
   }
