@@ -76,7 +76,7 @@ class puppet_dev::config(
     ensure  => file,
     owner   => 'root',
     group   => 'root',
-    mode    => '0750',
+    mode    => '0755',
     content => template('puppet_dev/puppet_dev_run.erb'),
   }
 
